@@ -4,9 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 
-isEmpty(PREFIX) {
-  PREFIX = /opt/configParser2
-}
+include(../common.pri)
 
 DISTFILES += root.qml
 DEFINES += CONF=\\\"$${PREFIX}/etc/root.qml\\\"

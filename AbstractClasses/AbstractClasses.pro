@@ -11,9 +11,7 @@ HEADERS += \
     Server.h
 
 # Default rules for deployment
-isEmpty(PREFIX) {
-  PREFIX = /opt/configParser2
-}
+include(../common.pri)
 
 headers.path    = $${PREFIX}/include
 headers.files   += $$HEADERS

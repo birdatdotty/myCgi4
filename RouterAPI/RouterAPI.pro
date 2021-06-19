@@ -16,9 +16,7 @@ HEADERS += \
 INCLUDEPATH += $$PWD/../ImportLib
 DEPENDPATH += $$PWD/../ImportLib
 # Default rules for deployment.
-isEmpty(PREFIX) {
-  PREFIX = /opt/configParser2
-}
+include(../common.pri)
 
 target.path = $${PREFIX}/lib
 !isEmpty(target.path): INSTALLS += target
