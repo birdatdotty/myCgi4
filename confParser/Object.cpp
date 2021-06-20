@@ -42,10 +42,9 @@ std::string Object::name() const {
 
 bool Object::buildTree(ImportLib *parentLib)
 {
-    std::cout << "_name: " << _name << std::endl;
-//    ImportLib* self = confParser->
     if (_name == "SimpeHTTPServer")
         return false;
+
     ImportLib* self = confParser->build(_name);
     self->configure(options);
     parentLib->addChildren(self);
@@ -53,8 +52,6 @@ bool Object::buildTree(ImportLib *parentLib)
     for (std::list<Object*>::iterator it = childrens.begin(); it != childrens.end(); it++)
     {
         (*it)->buildTree(self);
-//        if (!(*it)->buildTree(self))
-//            return false;
     }
     std::cout << "_name: " << _name << std::endl;
     std::cout << "self: " << self <<std::endl;

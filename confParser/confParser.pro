@@ -1,4 +1,7 @@
-TEMPLATE = app
+#TEMPLATE = app
+TEMPLATE = lib
+CONFIG += staticlib
+
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
@@ -14,8 +17,7 @@ SOURCES += \
         Command.cpp \
         ConfParser.cpp \
         Object.cpp \
-        Option.cpp \
-        main.cpp
+        Option.cpp
 
 HEADERS += \
     Action.h \
@@ -32,7 +34,7 @@ target.path = $${PREFIX}/bin
 QMAKE_LFLAGS_RPATH=
 QMAKE_LFLAGS += "-Wl,-rpath,$${PREFIX}/lib"
 
-LIBS += -L$$OUT_PWD/../ImportLib/ -lImportLib -ldl
+#LIBS += -L$$OUT_PWD/../ImportLib/ -lImportLib -ldl
 
 INCLUDEPATH += $$PWD/../ImportLib
 DEPENDPATH += $$PWD/../ImportLib
@@ -40,4 +42,4 @@ DEPENDPATH += $$PWD/../ImportLib
 INCLUDEPATH += $$PWD/../AbstractClasses
 DEPENDPATH += $$PWD/../AbstractClasses
 
-!isEmpty(target.path): INSTALLS += target
+#!isEmpty(target.path): INSTALLS += target

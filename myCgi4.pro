@@ -7,4 +7,5 @@ SUBDIRS += \
   RouterAPI \
   RouterHTML \
   SimpleHTTPServer \
-  confParser
+  confParser \
+  myCgi4
