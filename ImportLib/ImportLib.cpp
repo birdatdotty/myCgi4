@@ -49,3 +49,10 @@ fnInit Import::import(std::string lib) {
 void ImportLib::addChildren(ImportLib *children) {
     childrens.push_back(children);
 }
+
+#include <iostream>
+bool ImportLib::run() {
+    std::cout << "bool ImportLib::run()" << std::endl;
+
+    return true;
+}

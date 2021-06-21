@@ -25,5 +25,8 @@ DEPENDPATH += $$PWD/../confParser
 INCLUDEPATH += $$PWD/../AbstractClasses
 DEPENDPATH += $$PWD/../AbstractClasses
 
+INCLUDEPATH += $$PWD/../Service
+DEPENDPATH += $$PWD/../Service
+
 target.path = $${PREFIX}/bin
 !isEmpty(target.path): INSTALLS += target

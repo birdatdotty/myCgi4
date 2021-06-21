@@ -15,7 +15,7 @@ void Object::addOption(Option *option) {
         _id = option->value();
 }
 
-void Object::addChildren(Object *object) {
+ void Object::addChildren(Object *object) {
     childrens.push_back(object);
 }
 
@@ -42,21 +42,18 @@ std::string Object::name() const {
 
 bool Object::buildTree(ImportLib *parentLib)
 {
-    if (_name == "SimpeHTTPServer")
-        return false;
+//    if (_name == "SimpeHTTPServer")
+//        return false;
 
-    ImportLib* self = confParser->build(_name);
+    self = confParser->build(_name);
     self->configure(options);
-    parentLib->addChildren(self);
+    if (parentLib)
+        parentLib->addChildren(self);
 
     for (std::list<Object*>::iterator it = childrens.begin(); it != childrens.end(); it++)
     {
         (*it)->buildTree(self);
     }
-    std::cout << "_name: " << _name << std::endl;
-    std::cout << "self: " << self <<std::endl;
-    std::cout << "_name: " << _name << std::endl;
-    self->testModule();
 
     return true;
 }

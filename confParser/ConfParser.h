@@ -11,10 +11,14 @@
 #include "Command.h"
 
 #include "ImportLib.h"
+#include "Parser.h"
+#include "ParserData.h"
 
 class ConfParser
-        : protected Action,
-          public Import
+        : //protected Action,
+          public Import,
+          public Parser,
+          public ParserData
 
 {
 public:
@@ -25,14 +29,17 @@ bool importAll();
 bool buildTree();
     enum class Type {STRING, DIGIT, NAME, DEFAULT, COMMAND, OPTION, OBJECT};
 
+    ImportLib *getRootLib();
+
 private:
     std::string ctx;
+    ImportLib *importRoot;
 
 
     // for parse:
-    std::map<std::string,Object*> ids;
-    std::list<std::string> lexemes;
-    std::list<Command*> commands;
+//    std::map<std::string,Object*> ids;
+//    std::list<std::string> lexemes;
+//    std::list<Command*> commands;
 //    Action oper;
     bool finishWord();
     bool colon;

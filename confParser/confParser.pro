@@ -17,14 +17,17 @@ SOURCES += \
         Command.cpp \
         ConfParser.cpp \
         Object.cpp \
-        Option.cpp
+        Option.cpp \
+        Parser.cpp
 
 HEADERS += \
     Action.h \
     Command.h \
     ConfParser.h \
     Object.h \
-    Option.h
+    Option.h \
+    Parser.h \
+    ParserData.h
 
 conffile.files += root.qml
 conffile.path = $${PREFIX}/etc

@@ -9,14 +9,12 @@
 
 #include <unistd.h>
 #include <cstring>
+#include <AOption.h>
 
 using namespace std;
 
 extern "C" void init(ImportLib** ret) {
-    std::cout << "extern \"C\" void init(ImportLib** ret)" << "--" << std::endl;
     ImportLib* ss = new SimpleHTTPServer();
-    ss->testModule();
-    std::cout << "extern \"C\" void init(ImportLib** ret)" << "--" << std::endl;
     *ret = new SimpleHTTPServer();
 }
 
@@ -83,7 +81,11 @@ bool SimpleHTTPServer::shutdown()
     return true;
 }
 
-void SimpleHTTPServer::configure(std::list<AOption *> options) {}
+void SimpleHTTPServer::configure(std::list<AOption *> options) {
+    std::cout << "void SimpleHTTPServer::configure(std::list<AOption *> options)" << std::endl;
+    for (std::list<AOption*>::iterator it = options.begin(); it != options.end(); it++)
+        std::cout << "configure\t" << (*it)->name() << ": " << (*it)->value() << std::endl;
+}
 
 void SimpleHTTPServer::testModule()
 {

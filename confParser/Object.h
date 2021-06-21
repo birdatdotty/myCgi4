@@ -19,6 +19,8 @@ public:
 
     void setConfParser(ConfParser* newConfParser);
 
+    ImportLib* self;
+
 private:
     Object* _parent;
     std::string _name;

@@ -26,7 +26,9 @@ class ImportLib
 public:
     virtual void testModule() = 0;
     virtual void configure(std::list<AOption*> options) = 0;
-    void addChildren(ImportLib* children);
+    virtual void addChildren(ImportLib* children);
+    virtual std::string typeName() {return "";}
+    virtual bool run();
 
 private:
     std::list<ImportLib*> childrens;

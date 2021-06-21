@@ -3,7 +3,7 @@
 #include <iostream>
 
 extern "C" void init(ImportLib** ret) {
-    std::cout << "extern \"C\" void init(ImportLib** ret)" << std::endl;
+//    std::cout << "extern \"C\" void init(ImportLib** ret)" << std::endl;
     *ret = new RouterHTML();
 }
 

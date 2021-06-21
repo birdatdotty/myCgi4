@@ -89,7 +89,6 @@ bool ConfParser::importAll()
     std::string importModuleName;
     for (std::list<Command*>::iterator it = commands.begin(); it != commands.end(); it++) {
         importModuleName = (*it)->data("import");
-        std::cout << "importModuleName: " << importModuleName << std::endl;
         if (importModuleName != "") {
             load(importModuleName);
             ImportLib* testLib = build(importModuleName);
@@ -103,33 +102,40 @@ bool ConfParser::importAll()
 
 bool ConfParser::buildTree()
 {
-    ImportLib *importRoot = build(root->name());
-    importRoot->testModule();
-    root->buildTree(importRoot);
+    std::cout << __LINE__ << ": " << root->name() << std::endl;
+//    importRoot = build(root->name());
+//    root->buildTree(importRoot);
+    root->buildTree(nullptr);
+    importRoot = root->self;
+
+    std::cout << "importRoot(root->name()): " << __LINE__ << root->name() << std::endl;
+
     return true;
 }
+
+ImportLib *ConfParser::getRootLib() {return importRoot;}
 
 bool ConfParser::finishWord()
 {
     if (word.size() > 0) {
         Action::Oper _action = action();
         if (_action == Action::Oper::SUM) {
-            std::string last = lexemes.back();
-            lexemes.pop_back();
+            std::string last = strList.back();
+            strList.pop_back();
 
-            lexemes.push_back(last + word);
+            strList.push_back(last + word);
         }
         else if (_action == Action::Oper::DOT) {
-            std::string last = lexemes.back();
-            lexemes.pop_back();
+            std::string last = strList.back();
+            strList.pop_back();
 
             if (ids[last]) {
                 std::string value = ids[last]->value(word);
-                lexemes.push_back(value);
+                strList.push_back(value);
             }
         }
         else
-            lexemes.push_back(word);
+            strList.push_back(word);
 
         word.clear();
         if (!colon && ch == '+') { set(ch); }
@@ -153,30 +159,30 @@ bool ConfParser::finishWord()
     }
     else if (ch == '\n' || ch == ';') {
         if (type == Type::OPTION) {
-            Option* option = new Option(lexemes);
+            Option* option = new Option(strList);
             curObject->addOption(option);
         }
         else if (type == Type::OBJECT) {
-            std::string name = *lexemes.rbegin();
+            std::cout << "111111111111111111111111" << std::endl;
+            std::string name = *strList.rbegin();
             Object* object = new Object(curObject, name);
             object->setConfParser(this);
             if (curObject)
                 curObject->addChildren(object);
             else {
                 root = curObject = object;
-//                root = object;
             }
 
             curObject = object;
         }
-        else /*if (type == COMMAND)*/ {
-            if (lexemes.size() > 1) {
-                Command* command = new Command(lexemes);
+        else {
+            if (strList.size() > 1) {
+                Command* command = new Command(strList);
                 if (!curObject)
                     commands.push_back(command);
             }
         }
-        lexemes.clear();
+        strList.clear();
         type = Type::COMMAND;
     }
     if (!colon && ch == '+') { set(ch); }
@@ -188,7 +194,6 @@ bool ConfParser::finishWord()
 // for debug:
 void ConfParser::echo()
 {
-//    std::cout << commands.size() << std::endl;
     for (std::list<Command*>::iterator it = commands.begin(); it != commands.end(); it++)
         (*it)->echo("");
     root->echo("");

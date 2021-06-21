@@ -10,6 +10,7 @@ public:
 
     virtual void testModule();
     virtual void configure(std::list<AOption*> options);
+    virtual std::string typeName() {return "Router";}
 };
 
 #endif // SERVICE_H

@@ -15,3 +15,25 @@ Action::Oper Action::action() {
     _oper = Oper::NONE;
     return ret;
 }
+
+
+/// rebuild it class:
+inline void Action::actionChar()
+{
+    word += ch;
+}
+
+inline void Action::actionSum()
+{
+    tmpWord += word;
+    word.clear();
+    chAction = ' ';
+}
+
+inline void Action::actionSpace()
+{
+    tmpWord += word;
+    word.clear();
+    strList.push_back(tmpWord);
+    tmpWord.clear();
+}

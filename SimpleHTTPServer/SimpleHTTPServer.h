@@ -20,6 +20,8 @@ public:
     virtual bool shutdown();
     virtual void configure(std::list<AOption*> options);
 
+    virtual std::string typeName() {return "Server";}
+
 private:
     int sock;
     int port;
