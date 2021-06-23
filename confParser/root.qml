@@ -27,6 +27,10 @@ Service {
     id: simpleHTTPServer
     port: 9933
   }
+  SimpleHTTPServer {
+    id: simpleHTTPServer2
+    port: 9934
+  }
 
   TestLib {
       id:ss

@@ -15,6 +15,7 @@ QMAKE_LFLAGS += "-Wl,-rpath,$${PREFIX}/lib"
 
 LIBS += -L$$OUT_PWD/../ImportLib/ -lImportLib -ldl
 LIBS += -L$$OUT_PWD/../confParser/ -lconfParser -ldl
+LIBS +=-lpthread
 
 INCLUDEPATH += $$PWD/../ImportLib
 DEPENDPATH += $$PWD/../ImportLib

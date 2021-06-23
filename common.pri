@@ -1,4 +1,4 @@
 isEmpty(PREFIX) {
   PREFIX = /opt/myCgi4
 }
-VERSION = 0.4.16
+VERSION = 0.4.18

@@ -5,6 +5,7 @@
 #include "Server.h"
 
 #include <list>
+#include <thread>
 
 class Service:
         public ImportLib,
@@ -24,6 +25,9 @@ public:
 
 private:
     std::list<Server*> servers;
+    std::list<std::thread> threads;
+    void startServer(Server* server);
+
     ImportLib* tl;
 };
 

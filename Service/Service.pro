@@ -15,6 +15,8 @@ SOURCES += \
 HEADERS += \
     Service.h
 
+LIBS += -lpthread
+
 INCLUDEPATH += $$PWD/../ImportLib
 DEPENDPATH += $$PWD/../ImportLib
 
@@ -26,6 +28,8 @@ DEPENDPATH += $$PWD/../TestLib
 
 # Default rules for deployment.
 include(../common.pri)
+
+
 
 target.path = $${PREFIX}/lib
 !isEmpty(target.path): INSTALLS += target
