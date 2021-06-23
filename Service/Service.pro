@@ -21,6 +21,9 @@ DEPENDPATH += $$PWD/../ImportLib
 INCLUDEPATH += $$PWD/../AbstractClasses
 DEPENDPATH += $$PWD/../AbstractClasses
 
+INCLUDEPATH += $$PWD/../TestLib
+DEPENDPATH += $$PWD/../TestLib
+
 # Default rules for deployment.
 include(../common.pri)
 

@@ -2,6 +2,7 @@ import Service
 import RouterAPI
 import RouterHTML
 import SimpleHTTPServer
+import TestLib
 
 Service {
   id: main
@@ -24,7 +25,11 @@ Service {
   
   SimpleHTTPServer {
     id: simpleHTTPServer
-    port: 9999
+    port: 9933
+  }
+
+  TestLib {
+      id:ss
   }
 }
 

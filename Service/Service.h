@@ -6,7 +6,9 @@
 
 #include <list>
 
-class Service: public ImportLib
+class Service:
+        public ImportLib,
+        public Bus
 {
 public:
     Service();
@@ -17,10 +19,12 @@ public:
 
     virtual void addChildren(ImportLib* children);
     virtual bool run();
+    virtual std::string data();
 
 
 private:
     std::list<Server*> servers;
+    ImportLib* tl;
 };
 
 #endif // SERVICE_H

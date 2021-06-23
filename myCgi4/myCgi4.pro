@@ -28,5 +28,8 @@ DEPENDPATH += $$PWD/../AbstractClasses
 INCLUDEPATH += $$PWD/../Service
 DEPENDPATH += $$PWD/../Service
 
+INCLUDEPATH += $$PWD/../TestLib
+DEPENDPATH += $$PWD/../TestLib
+
 target.path = $${PREFIX}/bin
 !isEmpty(target.path): INSTALLS += target

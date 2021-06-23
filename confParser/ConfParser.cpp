@@ -163,7 +163,6 @@ bool ConfParser::finishWord()
             curObject->addOption(option);
         }
         else if (type == Type::OBJECT) {
-            std::cout << "111111111111111111111111" << std::endl;
             std::string name = *strList.rbegin();
             Object* object = new Object(curObject, name);
             object->setConfParser(this);

@@ -6,26 +6,39 @@
 // https://rsdn.org/article/unix/sockets.xml
 #include "Server.h"
 #include "Bus.h"
-
 #include "ImportLib.h"
 
+#include <netinet/in.h>
+
+
+
 class SimpleHTTPServer
-        : public Server,
-          public ImportLib
+        :
+          public ImportLib,
+        public Server
 {
 public:
-    SimpleHTTPServer(/*int port*/);
-    virtual void testModule();
+    SimpleHTTPServer();
     virtual void start(Bus* bus);
-    virtual bool shutdown();
-    virtual void configure(std::list<AOption*> options);
+    virtual bool shutdownServer();
+    virtual void stop();
+    virtual bool run();
 
+
+    virtual void testModule();
+    virtual void configure(std::list<AOption*> options);
     virtual std::string typeName() {return "Server";}
 
+
 private:
+    void setPort();
+    Bus* bus;
     int sock;
+    int listener;
     int port;
     bool status;
+    struct sockaddr_in addr;
 };
+
 
 #endif // SIMPLEHTTPSERVER_H

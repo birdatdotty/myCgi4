@@ -37,12 +37,24 @@ void Service::addChildren(ImportLib *children) {
         std::cout << __LINE__ << ": " << typeName() << " [" << this << "] line:" << std::endl;
         servers.push_back(item);
     }
-
+    if (children->typeName() == "TestLib")
+    {
+        tl = dynamic_cast<ImportLib*>(children);
+    }
     std::cout << __LINE__ << " <" << typeName() << "> " << ": " << this << " ->" << servers.size() << std::endl;
 }
 
 bool Service::run() {
     std::cout << __LINE__ << ">>" << typeName() << "[" << this << "] servers.size():" << servers.size() << std::endl;
 
+    for (std::list<Server*>::iterator it = servers.begin(); it != servers.end(); it++)
+        (*it)->start(this);
+
+    tl->run();
+
     return true;
+}
+
+std::string Service::data() {
+    return "HTTP/1.1 200 OK\nContent-Type: application/json; charset=UTF-8\nContent-Length: 9\n\nsasaddsB\n";
 }
