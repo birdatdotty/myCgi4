@@ -13,9 +13,8 @@
 
 
 class SimpleHTTPServer
-        :
-          public ImportLib,
-        public Server
+        : public ImportLib,
+          public Server
 {
 public:
     SimpleHTTPServer();

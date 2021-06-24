@@ -25,11 +25,11 @@ void TestLib::configure(std::list<AOption *> options) {
 bool TestLib::run()
 {
     std::cout << "bool TestLib::run()" << std::endl;
+    return false;
 }
 
 void TestLib::print() {
     std::cout << "void TestLib::print()" << std::endl;
-
 }
 
 void TestLib::testModule()

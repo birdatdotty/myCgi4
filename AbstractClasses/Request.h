@@ -11,8 +11,8 @@ public:
     explicit Request() {}
     virtual std::string url(/*const Router *router*/) const = 0;
     virtual std::string method() const = 0;
-    virtual std::string uri() const = 0;
-    virtual std::string getData() const = 0;
+//    virtual std::string uri() const = 0;
+//    virtual std::string getData() const = 0;
     virtual std::string contentType() const = 0;
     virtual std::string content() const = 0;
     virtual int contentLength() const = 0;

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <AOption.h>
+#include "Request.h"
 
 extern "C" void init(ImportLib** ret) {
 //    std::cout << "extern \"C\" void init(ImportLib** ret)" << std::endl;
@@ -47,17 +48,24 @@ void Service::addChildren(ImportLib *children) {
 bool Service::run() {
     std::cout << __LINE__ << ">>" << typeName() << "[" << this << "] servers.size():" << servers.size() << std::endl;
 
-    for (std::list<Server*>::iterator it = servers.begin(); it != servers.end(); it++)
+    for (std::list<Server*>::iterator it = servers.begin(); it != servers.end(); it++) {
+        std::cout << "(*it)->typeName(): " << (*it)->typeName() << std::endl;
         startServer(*it);
-//        (*it)->start(this);
+    }
 
-    tl->run();
+    for (std::list<std::thread>::iterator it = threads.begin(); it != threads.end(); it++) {
+        (*it).join();
+    }
 
     return true;
 }
 
-std::string Service::data() {
-    return "HTTP/1.1 200 OK\nContent-Type: application/json; charset=UTF-8\nContent-Length: 9\n\nsasaddsB\n";
+Page* Service::data(Request *req) {
+    std::string url = req->url();
+//    if (url.size() > 0)
+//    req->page();
+//    return "HTTP/1.1 200 OK\nContent-Type: application/json; charset=UTF-8\nContent-Length: 9\n\nsasaddsB\n";
+    return req->page();
 }
 
 void Service::startServer(Server *server) {

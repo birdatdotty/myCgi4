@@ -3,10 +3,13 @@
 
 #include <string>
 
+class Request;
+class Page;
+
 class Bus
 {
 public:
-    virtual std::string data() = 0;
+    virtual Page* data(Request* req) = 0;
 };
 
 #endif // BUS_H

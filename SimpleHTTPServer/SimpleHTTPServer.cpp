@@ -1,3 +1,4 @@
+#include "RequestSimpleHTTPServer.h"
 #include "SimpleHTTPServer.h"
 
 #include <thread>
@@ -17,7 +18,6 @@
 
 
 extern "C" void init(ImportLib** ret) {
-    ImportLib* ss = new SimpleHTTPServer();
     *ret = new SimpleHTTPServer();
 }
 
@@ -39,7 +39,8 @@ void SimpleHTTPServer::start(Bus *bus) {
     listener = socket(AF_INET, SOCK_STREAM, 0);
     const int trueFlag = 1;
     if (setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &trueFlag, sizeof(int)) < 0)
-    perror("Failure");
+        perror("Failure");
+
 
     if(listener < 0)
     {
@@ -69,7 +70,30 @@ void SimpleHTTPServer::start(Bus *bus) {
             bytes_read = recv(sock, buf, 1024, 0);
             if(bytes_read <= 0) break;
 
-            answ = bus->data();
+            char buf1[] = "GET / HTTP/1.1\r\n"
+                          "Host: localhost:9933\r\n"
+                          "User-Agent: curl/7.76.1\r\n"
+                          "Accept: */*\r\n"
+                          "\r\n";
+
+//            std::string ctx(buf);
+            RequestSimpleHTTPServer *requestHTTPServer = new RequestSimpleHTTPServer(buf);
+
+            std::cout << "requestHTTPServer->url()" << std::endl;
+            std::cout << "[" << requestHTTPServer->url() << "]" << std::endl;
+            std::cout << "requestHTTPServer->method()" << std::endl;
+            std::cout << "[" << requestHTTPServer->method() << "]" << std::endl;
+            std::cout << "requestHTTPServer->protocol()" << std::endl;
+            std::cout << "[" << requestHTTPServer->protocol() << "]" << std::endl;
+            std::cout << "requestHTTPServer->content()" << std::endl;
+            std::cout << "[" << requestHTTPServer->content() << "]" << std::endl;
+            std::cout << "requestHTTPServer->options()" << std::endl;
+            requestHTTPServer->options();
+
+//            std::cout << "host:" << requestHTTPServer->host() << std::endl;
+
+
+            answ = bus->data(requestHTTPServer)->out();
             const char* data = answ.c_str();
             send(sock, data, strlen(data), 0);
         }
@@ -96,7 +120,7 @@ void SimpleHTTPServer::stop()
 bool SimpleHTTPServer::run()
 {
     std::cout << "bool SimpleHTTPServer::run()" << std::endl;
-    return false;
+    return true;
 }
 
 void SimpleHTTPServer::testModule() {
@@ -120,3 +144,4 @@ void SimpleHTTPServer::setPort()
     addr.sin_port = htons(port);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
 }
+

@@ -4,6 +4,8 @@
 #include <string>
 
 class Page {
+public:
+    virtual ~Page() {};
     virtual std::string out() = 0;
 };
 

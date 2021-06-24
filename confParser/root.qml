@@ -37,4 +37,4 @@ Service {
   }
 }
 
-Service RouterAPI RouterHTML SimpleHTTPServer
+//Service RouterAPI RouterHTML SimpleHTTPServer LibEventHTTPServer

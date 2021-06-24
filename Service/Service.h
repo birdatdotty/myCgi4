@@ -20,7 +20,7 @@ public:
 
     virtual void addChildren(ImportLib* children);
     virtual bool run();
-    virtual std::string data();
+    virtual Page* data(Request* req);
 
 
 private:
